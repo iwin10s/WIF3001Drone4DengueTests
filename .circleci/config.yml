@@ -1,0 +1,139 @@
+version: 2.1
+
+# Define reusable commands
+commands:
+  restore_node_cache_client_admin:
+    description: "Restore client-admin Node.js dependencies cache"
+    steps:
+      - restore_cache:
+          keys:
+            - node-client-admin-v2-{{ checksum "client-admin/package-lock.json" }}
+            - node-client-admin-v2-
+
+  save_node_cache_client_admin:
+    description: "Save client-admin Node.js dependencies cache"
+    steps:
+      - save_cache:
+          key: node-client-admin-v2-{{ checksum "client-admin/package-lock.json" }}
+          paths:
+            - client-admin/node_modules
+
+  restore_node_cache_client_mobile:
+    description: "Restore client-mobile Node.js dependencies cache"
+    steps:
+      - restore_cache:
+          keys:
+            - node-client-mobile-v2-{{ checksum "client-mobile/package-lock.json" }}
+            - node-client-mobile-v2-
+
+  save_node_cache_client_mobile:
+    description: "Save client-mobile Node.js dependencies cache"
+    steps:
+      - save_cache:
+          key: node-client-mobile-v2-{{ checksum "client-mobile/package-lock.json" }}
+          paths:
+            - client-mobile/node_modules
+
+  restore_node_cache_server_api:
+    description: "Restore server-api Node.js dependencies cache"
+    steps:
+      - restore_cache:
+          keys:
+            - node-server-api-v2-{{ checksum "server-api/package-lock.json" }}
+            - node-server-api-v2-
+
+  save_node_cache_server_api:
+    description: "Save server-api Node.js dependencies cache"
+    steps:
+      - save_cache:
+          key: node-server-api-v2-{{ checksum "server-api/package-lock.json" }}
+          paths:
+            - server-api/node_modules
+
+  restore_python_cache:
+    description: "Restore Python dependencies cache"
+    steps:
+      - restore_cache:
+          keys:
+            - pip-v2-{{ checksum "server-ml/requirements.txt" }}
+            - pip-v2-
+
+  save_python_cache:
+    description: "Save Python dependencies cache"
+    steps:
+      - save_cache:
+          key: pip-v2-{{ checksum "server-ml/requirements.txt" }}
+          paths:
+            - ~/.cache/pip
+
+# Define jobs
+jobs:
+  # ============================================
+  # TEST JOBS (from original config)
+  # ============================================
+  # Note: Test jobs can be added here if needed in the future
+
+  # ============================================
+  # DATA PROCESSING JOBS (from GitHub Actions)
+  # ============================================
+
+  # Run Daily Data Processing Script Only
+  # This job only runs the data scraping script
+  # ML training, database storage, and git operations are handled by GitHub Actions
+  run-daily-data-processing:
+    docker:
+      - image: cimg/python:3.11
+    working_directory: ~/project
+    resource_class: medium  # More resources for data processing
+    steps:
+      - checkout
+      - restore_python_cache
+      - run:
+          name: Install Python dependencies
+          command: |
+            python3 -m pip install --upgrade pip
+            pip3 install requests pandas matplotlib plotly pytz scikit-learn joblib seaborn psycopg2-binary
+      - save_python_cache
+      - run:
+          name: Run Daily Data Processing Script
+          command: |
+            cd daily-scrap-dengue-data
+            python3 dailydenguedataprocessing.py
+      - run:
+          name: Commit and Push Data Processing Results
+          command: |
+            git config --global user.name "circleci[bot]"
+            git config --global user.email "circleci[bot]@users.noreply.github.com"
+            git remote set-url origin https://${GH_PAT}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}.git
+            git add -A
+            if git diff --staged --quiet; then
+              echo "No changes to commit"
+            else
+              git commit -m "Data processing: daily dengue data scraping [skip ci]"
+              git pull --rebase origin ${CIRCLE_BRANCH} || true
+              git push origin ${CIRCLE_BRANCH} || echo "Push failed or nothing to push"
+            fi
+
+
+# ============================================
+# WORKFLOWS
+# ============================================
+
+workflows:
+  version: 2
+  
+  # Daily data processing workflow
+  # Runs daily at 1pm UTC (9pm Malaysia time)
+  # Only runs data scraping - GitHub Actions handles ML training and DB storage
+  daily-data-processing:
+    triggers:
+      # - schedule:
+      #     cron: "0 13 * * *"  # 1pm UTC = 9pm Malaysia time
+      #     filters:
+      #       branches:
+      #         only:
+      #           - main
+      #           - master
+      #           - development
+    jobs:
+      - run-daily-data-processing

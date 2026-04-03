@@ -2,9 +2,10 @@
 
 Hybrid system for Malaysian public health dengue surveillance: a mobile app (**DroneEye**), an admin web dashboard, a Node.js API, Python ML services, and automation for data pipelines and geocoding. It combines drone imagery, meteorological data, and machine learning to support early awareness and operational decisions.
 
-# WIF3001Drone4DengueTests
+## Modules and use cases
 
-A repository that holds the test scripts for testing the Drone4Dengue Application
+- [Modules](docs/modules.md)
+- [Use cases](docs/use-cases.md)
 
 ## Tech stack
 
@@ -36,7 +37,12 @@ drone4dengue/
 
 ## Documentation
 
-- [Setup guide]
+- [Setup guide](docs/setup-guide.md) — run API, admin, mobile, and ML locally
+- [API specification](docs/api-spec.md)
+- [UI navigation](docs/ui-navigation.md)
+- [Prediction model](docs/prediction-model.md)
+- [Three-model prediction flow](docs/three-model-prediction-flow.md)
+- [GitHub Actions setup](docs/github-actions-setup.md) — secrets and scheduled jobs
 
 ## Getting started
 
@@ -45,4 +51,3 @@ drone4dengue/
 Follow **[docs/setup-guide.md](docs/setup-guide.md)** for step-by-step installation, environment variables, Prisma migrations, and local URLs.
 
 Before publishing this repository publicly, add a **LICENSE** file, remove or redact any committed secrets and environment files, and confirm [GitHub Actions secrets](.github/workflows/README.md) are only stored in the repository settings, not in the codebase.
-

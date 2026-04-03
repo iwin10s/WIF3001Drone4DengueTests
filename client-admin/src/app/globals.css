@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    /* New Monochromatic Blue Palette */
+    /* #BDE8F5 - Backgrounds / Light Containers */
+    --background: 193 79% 85%;
+    /* #0F2854 - Primary Dark / Text / Navbar */
+    --foreground: 214 69% 19%;
+    --card: 193 79% 85%;
+    --card-foreground: 214 69% 19%;
+    --popover: 193 79% 85%;
+    --popover-foreground: 214 69% 19%;
+    /* #0F2854 - Primary Dark */
+    --primary: 214 69% 19%;
+    --primary-foreground: 193 79% 85%;
+    /* #1C4D8D - Secondary / Active States */
+    --secondary: 210 68% 33%;
+    --secondary-foreground: 193 79% 85%;
+    --muted: 193 79% 85%;
+    --muted-foreground: 210 68% 33%;
+    /* #4988C4 - Accents / Buttons / Links */
+    --accent: 206 54% 53%;
+    --accent-foreground: 214 69% 19%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 193 50% 70%;
+    --input: 193 50% 70%;
+    --ring: 206 54% 53%;
+    --chart-1: 206 54% 53%;
+    --chart-2: 210 68% 33%;
+    --chart-3: 214 69% 19%;
+    --chart-4: 193 79% 85%;
+    --chart-5: 200 70% 60%;
+    --radius: 0.5rem;
+    /* #0F2854 - Navbar */
+    --sidebar-background: 214 69% 19%;
+    --sidebar-foreground: 193 79% 85%;
+    --sidebar-primary: 210 68% 33%;
+    --sidebar-primary-foreground: 193 79% 85%;
+    --sidebar-accent: 206 54% 53%;
+    --sidebar-accent-foreground: 214 69% 19%;
+    --sidebar-border: 210 68% 33%;
+    --sidebar-ring: 206 54% 53%;
+  }
+  .dark {
+    /* Dark mode with inverted palette */
+    /* #0F2854 as background for dark mode */
+    --background: 214 69% 19%;
+    /* #BDE8F5 as foreground for dark mode */
+    --foreground: 193 79% 85%;
+    --card: 214 69% 19%;
+    --card-foreground: 193 79% 85%;
+    --popover: 214 69% 19%;
+    --popover-foreground: 193 79% 85%;
+    --primary: 193 79% 85%;
+    --primary-foreground: 214 69% 19%;
+    /* #1C4D8D - Secondary / Active States */
+    --secondary: 210 68% 33%;
+    --secondary-foreground: 193 79% 85%;
+    --muted: 210 68% 33%;
+    --muted-foreground: 193 79% 85%;
+    /* #4988C4 - Accents */
+    --accent: 206 54% 53%;
+    --accent-foreground: 214 69% 19%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 210 68% 33%;
+    --input: 210 68% 33%;
+    --ring: 206 54% 53%;
+    --chart-1: 206 54% 53%;
+    --chart-2: 210 68% 33%;
+    --chart-3: 193 79% 85%;
+    --chart-4: 200 70% 60%;
+    --chart-5: 180 60% 50%;
+    --sidebar-background: 214 69% 19%;
+    --sidebar-foreground: 193 79% 85%;
+    --sidebar-primary: 206 54% 53%;
+    --sidebar-primary-foreground: 214 69% 19%;
+    --sidebar-accent: 210 68% 33%;
+    --sidebar-accent-foreground: 193 79% 85%;
+    --sidebar-border: 210 68% 33%;
+    --sidebar-ring: 206 54% 53%;
+  }
+  .maplibregl-popup-content {
+    @apply bg-transparent! shadow-none! p-0! rounded-none!;
+  }
+  .maplibregl-popup-tip {
+    @apply hidden!;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Leaflet map CSS */
+@import 'leaflet/dist/leaflet.css';
+
+/* Custom input styles for transparent backgrounds */
+input::placeholder {
+  opacity: 0.7;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Shimmer animation for lazy loader */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}

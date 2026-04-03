@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "93522668734",
+    "project_id": "dengueeye-notifications",
+    "storage_bucket": "dengueeye-notifications.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:93522668734:android:002c826cb32a80fd0382ef",
+        "android_client_info": {
+          "package_name": "com.adamarbain.dengueeyemobileapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "93522668734-fko2eko5u2tmnq8a26bd5r710nsi1am3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.adamarbain.dengueeyemobileapp",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "93522668734-vv3f9073cajk0jo8e4m0hqoco93rtonr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.adamarbain.dengueeyemobileapp",
+            "certificate_hash": "e2b6a830c2245423703f5cce3c0db86e68d915b3"
+          }
+        },
+        {
+          "client_id": "93522668734-450k3d6bf46ibs47e5dnmkiavds24i13.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCb11uzyT6Ni29GJfxf-pCe4urVd5kxUuI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "93522668734-450k3d6bf46ibs47e5dnmkiavds24i13.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "93522668734-hcfbv12lrs7v1cev26hpvlh544mqa07l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.adamarbain.dengueeyemobileapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
